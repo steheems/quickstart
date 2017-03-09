@@ -4,8 +4,10 @@ import {Component} from "@angular/core";
   selector: 'user',
   template: `
     <h1>Hello {{name}}</h1>
-    <p><strong>Email:</strong> {{email}}</p>
-    <p><strong>Adress:</strong> {{adress.street}} {{adress.city}}, {{adress.state}}</p>
+    <h3>Email:</h3> 
+    <p><a href="mailto:{{email}}">{{email}}</a></p>
+    <h3>Adress:</h3> 
+    <p>{{adress.street}} {{adress.city}}, {{adress.state}}</p>
     <button (click)="toggleHobbies()">{{showHobbies ? 'Hide hobbies' : 'Show hobbies'}}</button>
     <div *ngIf="showHobbies">
       <h3>Hobbies</h3>
