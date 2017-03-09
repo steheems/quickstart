@@ -1,7 +1,8 @@
-import {AppComponent} from "./app.component";
-import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {By} from "@angular/platform-browser";
-import {DebugElement} from "@angular/core";
+import { AppComponent } from './app.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { UserComponent } from './components/user.component';
 
 describe('AppComponent', function () {
   let de: DebugElement;
@@ -10,7 +11,7 @@ describe('AppComponent', function () {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent]
+      declarations: [AppComponent, UserComponent]
     })
       .compileComponents();
   }));
@@ -26,7 +27,7 @@ describe('AppComponent', function () {
   it('should have expected <h1> text', () => {
     fixture.detectChanges();
     const h1 = de.nativeElement;
-    expect(h1.innerText).toMatch(/angular/i,
-      '<h1> should say something about "Angular"');
+    expect(h1.innerText).toMatch(/hello/i,
+      '<h1> should say "Hello"');
   });
 });
