@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from "@angular/core";
 
 @Component({
   selector: 'user',
@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
         <li *ngFor="let hobby of hobbies">{{hobby}}</li>
       </ul>
     </div>
-  `,
+  `
 })
 export class UserComponent {
   name: string;
@@ -26,10 +26,10 @@ export class UserComponent {
     this.name = 'Jane Doe';
     this.email = 'jane@doe.com';
     this.adress = {
-      street: '13 Mapple dr',
+      street: '13 Maple dr',
       city: 'New York',
       state: 'NY'
-    }
+    };
     this.hobbies = ['Photography', 'Martial arts', 'Movies'];
     this.showHobbies = false;
   }
