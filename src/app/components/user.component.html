@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<h1>Hello {{name}}</h1>
+<h3>Email:</h3>
+<p><a href="mailto:{{email}}">{{email}}</a></p>
+<h3>Adress:</h3>
+<p>{{adress.street}} {{adress.city}}, {{adress.state}}</p>
+<button (click)="toggleHobbies()">{{showHobbies ? 'Hide hobbies' : 'Show hobbies'}}</button>
+<div *ngIf="showHobbies">
+  <h3>Hobbies</h3>
+  <ul>
+    <li *ngFor="let hobby of hobbies; let i = index">
+      {{hobby}}
+      <button (click)="deleteHobby(i)">X</button>
+    </li>
+  </ul>
+  <form (submit)="addHobby(hobby.value)">
+    <p>
+      <label for="add-hobby">Add hobby:</label>
+      <input id="add-hobby" type="text" #hobby/>
+    </p>
+  </form>
+</div>
+<hr/>
+<h3>Edit user</h3>
+<form>
+  <p>
+    <label for="user-name">Name:</label>
+    <input id="user-name" type="text" name="name" [(ngModel)]="name"/>
+  </p>
+  <p>
+    <label for="user-email">Email:</label>
+    <input id="user-email" type="text" name="email" [(ngModel)]="email"/>
+  </p>
+  <p>
+    <label for="user-adress-street">Street:</label>
+    <input id="user-adress-street" type="text" name="adress.street" [(ngModel)]="adress.street"/>
+  </p>
+  <p>
+    <label for="user-adress-city">City:</label>
+    <input id="user-adress-city" type="text" name="adress.city" [(ngModel)]="adress.city"/>
+  </p>
+  <p>
+    <label for="user-adress-state">State:</label>
+    <input id="user-adress-state" type="text" name="adress.state" [(ngModel)]="adress.state"/>
+  </p>
+</form>
+<hr/>
+<h3>Posts</h3>
+<div *ngFor="let post of posts">
+  <h4>{{post.title}}</h4>
+  <p>{{post.body}}</p>
+</div>

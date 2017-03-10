@@ -86,8 +86,7 @@ function Reporter(options) {
       return spec.status;
     });
     statuses = _.uniq(statuses);
-    var status = statuses.indexOf('failed') >= 0 ? 'failed' : statuses.join(', ');
-    _currentSuite.status = status;
+    _currentSuite.status = statuses.indexOf('failed') >= 0 ? 'failed' : statuses.join(', ');
     log('Suite ' + _currentSuite.status + ': ' + suite.description, -1);
   };
 
@@ -109,7 +108,7 @@ function Reporter(options) {
   };
 
   this.jasmineDone = function() {
-    outputFile = options.outputFile;
+    var outputFile = options.outputFile;
     //// Alternate approach - just stringify the _root - not as pretty
     //// but might be more useful for automation.
     // var output = JSON.stringify(_root, null, 2);
