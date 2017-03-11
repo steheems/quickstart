@@ -1,4 +1,3 @@
-import { Pronoun } from './pronoun.interface';
 /**
  * Interface for user details.
  *
@@ -7,5 +6,5 @@ import { Pronoun } from './pronoun.interface';
 export interface UserDetails {
   firstName: string;
   lastName: string;
-  pronouns: Pronoun;
+  pronounsId: string;
 }

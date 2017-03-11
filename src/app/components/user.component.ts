@@ -20,12 +20,10 @@ export class UserComponent {
   pronouns: Pronoun[];
 
   constructor(private userService: UserService, private pronounService: PronounService) {
-    this.userService = userService;
-
     this.userDetails = {
       firstName: null,
       lastName: null,
-      pronouns: null
+      pronounsId: null
     };
     this.address = {
       street: '13 Maple dr',
@@ -38,7 +36,7 @@ export class UserComponent {
     this.userService.getUser('58c3b119aaf712a3e02da0ee').subscribe(user => {
       this.userDetails.firstName = user.firstName;
       this.userDetails.lastName = user.lastName;
-      this.userDetails.pronouns = user.pronouns;
+      this.userDetails.pronounsId = user.pronounsId;
       this.email = this.userDetails.firstName.toLowerCase() + '@' + this.userDetails.lastName.toLowerCase() + '.com';
     });
 

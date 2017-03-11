@@ -26,7 +26,13 @@ export class UserService {
       .map(res => res.json());
   }
 
+  newUser(userDetails: UserDetails) {
+    return this.http.post(this.url, userDetails)
+      .map(res => res.json());
+  }
+
   updateUser(id: string, userDetails: UserDetails) {
-    return this.http.put(this.url + id, userDetails);
+    return this.http.put(this.url + id, userDetails)
+      .map(res => res.json());
   }
 }
