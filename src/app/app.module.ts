@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AboutComponent } from './components/about.component';
 import { routing } from './app.routing';
+import { PronounComponent } from './components/pronoun.component';
+import { StoryComponent } from './components/story.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpModule, routing],
-  declarations: [AppComponent, UserComponent, AboutComponent],
+  declarations: [AppComponent, UserComponent, AboutComponent, PronounComponent, StoryComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

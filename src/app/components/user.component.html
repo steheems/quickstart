@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<h1>Hello {{userDetails.firstName}} {{userDetails.lastName}}</h1>
+<h1>Hello {{userDetails?.firstName}} {{userDetails?.lastName}}</h1>
 <h3>Email:</h3>
 <p><a href="mailto:{{email}}">{{email}}</a></p>
 <h3>Address:</h3>
@@ -25,15 +25,18 @@
 <form>
   <p>
     <label for="user-first-name">First name:</label>
-    <input id="user-first-name" type="text" name="userDetails.firstName" [(ngModel)]="userDetails.firstName"/>
+    <input id="user-first-name" type="text" name="userDetails.firstName" [ngModel]="userDetails?.firstName"
+           (ngModelChange)="userDetails.firstName=$event"/>
   </p>
   <p>
     <label for="user-last-name">Last name:</label>
-    <input id="user-last-name" type="text" name="userDetails.lastName" [(ngModel)]="userDetails.lastName"/>
+    <input id="user-last-name" type="text" name="userDetails.lastName" [ngModel]="userDetails?.lastName"
+           (ngModelChange)="userDetails.lastName=$event"/>
   </p>
   <p>
     <label for="user-pronouns">Pronouns:</label>
-    <select id="user-pronouns" name="userDetails.pronounsId" [(ngModel)]="userDetails.pronounsId">
+    <select id="user-pronouns" name="userDetails.pronounsId" [ngModel]="userDetails?.pronounsId"
+            (ngModelChange)="userDetails.pronounsId=$event">
       <option *ngFor="let pronoun of pronouns" [ngValue]="pronoun._id">{{pronoun.subject}}/{{pronoun.object}}</option>
     </select>
   </p>

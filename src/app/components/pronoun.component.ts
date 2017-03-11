@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
+import { PronounService } from '../services/pronoun.service';
+import { Pronoun } from '../interfaces/pronoun.interface';
 /**
  * Component to generate specified gender pronouns.
  *
@@ -7,8 +9,26 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'pronoun',
-  template: ''
+  template: `{{pronoun}}`,
+  providers: [PronounService]
 })
-export class PronounComponent {
+export class PronounComponent implements OnChanges {
+  @Input()
+  pronounsId: string;
+  @Input()
+  pronounType: string;
+  pronoun: string;
+
+  constructor(private pronounService: PronounService) {
+
+  }
+
+  ngOnChanges() {
+    if (this.pronounsId) {
+      this.pronounService.getPronoun(this.pronounsId).subscribe(pronoun => {
+        this.pronoun = Pronoun.getPronoun(this.pronounType, pronoun);
+      });
+    }
+  }
 
 }

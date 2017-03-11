@@ -6,36 +6,45 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../db');
+var ObjectID = require('mongodb').ObjectID;
 
 /* GET pronouns listing. */
 router.get('/', function (req, res, next) {
   var collection = db.get().collection('pronouns');
 
-  collection.find().toArray(function (err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
-    }
-  });
+  if (req.query['singular']) {
+    collection.find({"plural": {$eq: false}}).toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  } else if (req.query['plural']) {
+    collection.find({"plural": {$eq: true}}).toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  } else {
+    collection.find().toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(result);
+      }
+    });
+  }
 });
 
-router.get('/singular', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
   var collection = db.get().collection('pronouns');
 
-  collection.find({"plural": {$eq: false}}).toArray(function (err, result) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(result);
-    }
-  });
-});
-
-router.get('/plural', function (req, res, next) {
-  var collection = db.get().collection('pronouns');
-
-  collection.find({"plural": {$eq: true}}).toArray(function (err, result) {
+  collection.findOne({
+    _id: ObjectID(req.params.id)
+  }, function (err, result) {
     if (err) {
       res.send(err);
     } else {

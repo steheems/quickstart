@@ -3,7 +3,7 @@
  *
  * Created by erwin on 2017-03-11.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/users.service';
 import { UserDetails } from '../interfaces/userDetails.interface';
 import { PronounService } from '../services/pronoun.service';
@@ -25,11 +25,15 @@ import { Pronoun } from '../interfaces/pronoun.interface';
   `,
   providers: [UserService, PronounService]
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
   users: UserDetails[];
   pronouns: Pronoun[];
 
   constructor(private userService: UserService, private pronounService: PronounService) {
+
+  }
+
+  ngOnInit() {
     this.pronounService.getPronouns().subscribe(pronouns => {
       this.pronouns = pronouns;
     });

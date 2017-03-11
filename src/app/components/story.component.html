@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<h1>Story</h1>
+<p>
+  <pronoun [pronounsId]="user?.pronounsId" pronounType="PossessiveAdjective"></pronoun>
+  name was {{user?.firstName}}.
+</p>
+<p>
+  <pronoun [pronounsId]="user?.pronounsId" pronounType="Subject"></pronoun>
+  was called {{user?.firstName}} {{user?.lastName}}.
+</p>
+<p>
+  That name was
+  <pronoun [pronounsId]="user?.pronounsId" pronounType="possessivePronoun"></pronoun>
+  name.
+</p>
+<p>
+  {{user?.firstName}} is what they called
+  <pronoun [pronounsId]="user?.pronounsId" pronounType="object"></pronoun>
+  .
+</p>

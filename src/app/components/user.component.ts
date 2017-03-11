@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/users.service';
 import { UserDetails } from '../interfaces/userDetails.interface';
 import { Address } from '../interfaces/address.interface';
@@ -11,7 +11,7 @@ import { Pronoun } from '../interfaces/pronoun.interface';
   templateUrl: 'user.component.html',
   providers: [UserService, PronounService]
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   userDetails: UserDetails;
   email: string;
   address: Address;
@@ -20,11 +20,10 @@ export class UserComponent {
   pronouns: Pronoun[];
 
   constructor(private userService: UserService, private pronounService: PronounService) {
-    this.userDetails = {
-      firstName: null,
-      lastName: null,
-      pronounsId: null
-    };
+
+  }
+
+  ngOnInit() {
     this.address = {
       street: '13 Maple dr',
       city: 'New York',
@@ -34,10 +33,8 @@ export class UserComponent {
     this.showHobbies = false;
 
     this.userService.getUser('58c3b119aaf712a3e02da0ee').subscribe(user => {
-      this.userDetails.firstName = user.firstName;
-      this.userDetails.lastName = user.lastName;
-      this.userDetails.pronounsId = user.pronounsId;
-      this.email = this.userDetails.firstName.toLowerCase() + '@' + this.userDetails.lastName.toLowerCase() + '.com';
+      this.userDetails = user;
+      this.email = user.firstName.toLowerCase() + '@' + user.lastName.toLowerCase() + '.com';
     });
 
     this.pronounService.getPronouns(true).subscribe(pronouns => {

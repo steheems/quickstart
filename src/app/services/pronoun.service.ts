@@ -7,7 +7,7 @@ import { Http } from '@angular/http';
  */
 @Injectable()
 export class PronounService {
-  url = 'http://localhost:3030/pronouns/';
+  url = 'http://localhost:3030/pronouns';
 
   constructor(private http: Http) {
 
@@ -23,11 +23,15 @@ export class PronounService {
    */
   getPronouns(onlySingular?: boolean, onlyPlural?: boolean) {
     if (onlySingular && !onlyPlural) {
-      return this.http.get(this.url + 'singular').map(res => res.json());
+      return this.http.get(this.url + '?singular=true').map(res => res.json());
     } else if (!onlySingular && onlyPlural) {
-      return this.http.get(this.url + 'plural').map(res => res.json());
+      return this.http.get(this.url + '?plural=true').map(res => res.json());
     }
     // Otherwise return all pronouns
     return this.http.get(this.url).map(res => res.json());
+  }
+
+  getPronoun(id: string) {
+    return this.http.get(this.url + '/' + id).map(res => res.json());
   }
 }
