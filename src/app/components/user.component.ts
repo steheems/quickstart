@@ -1,31 +1,31 @@
 import { Component } from '@angular/core';
-import { PostsService } from '../services/posts.service';
 import { UserService } from '../services/users.service';
-import { UserDetails } from '../interfaces/user.interface';
+import { UserDetails } from '../interfaces/userDetails.interface';
+import { Address } from '../interfaces/address.interface';
+import { PronounService } from '../services/pronoun.service';
+import { Pronoun } from '../interfaces/pronoun.interface';
 
 @Component({
   moduleId: module.id,
   selector: 'user',
   templateUrl: 'user.component.html',
-  providers: [PostsService, UserService]
+  providers: [UserService, PronounService]
 })
 export class UserComponent {
   userDetails: UserDetails;
   email: string;
-  address: address;
+  address: Address;
   hobbies: string[];
   showHobbies: boolean;
-  posts: Post[];
+  pronouns: Pronoun[];
 
-  userService: UserService;
-
-  constructor(private postsService: PostsService, userService: UserService) {
+  constructor(private userService: UserService, private pronounService: PronounService) {
     this.userService = userService;
 
     this.userDetails = {
       firstName: null,
       lastName: null,
-      gender: null
+      pronouns: null
     };
     this.address = {
       street: '13 Maple dr',
@@ -35,16 +35,16 @@ export class UserComponent {
     this.hobbies = ['Photography', 'Martial arts', 'Movies'];
     this.showHobbies = false;
 
-    this.postsService.getPosts().subscribe(posts => {
-      this.posts = posts;
-    });
-
     this.userService.getUser('58c3b119aaf712a3e02da0ee').subscribe(user => {
       this.userDetails.firstName = user.firstName;
       this.userDetails.lastName = user.lastName;
-      this.userDetails.gender = user.gender;
+      this.userDetails.pronouns = user.pronouns;
       this.email = this.userDetails.firstName.toLowerCase() + '@' + this.userDetails.lastName.toLowerCase() + '.com';
-    })
+    });
+
+    this.pronounService.getPronouns(true).subscribe(pronouns => {
+      this.pronouns = pronouns;
+    });
   }
 
   toggleHobbies() {
@@ -64,16 +64,4 @@ export class UserComponent {
       console.log(result);
     });
   }
-}
-
-interface address {
-  street: string;
-  city: string;
-  state: string;
-}
-
-interface Post {
-  id: number;
-  title: string;
-  body: string;
 }

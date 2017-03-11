@@ -7,11 +7,11 @@ var ObjectID = require('mongodb').ObjectID;
 router.get('/', function (req, res, next) {
   var collection = db.get().collection('users');
 
-  collection.find().toArray(function (err, users) {
+  collection.find().toArray(function (err, result) {
     if (err) {
       res.send(err);
     } else {
-      res.json(users);
+      res.json(result);
     }
   });
 });
@@ -21,11 +21,11 @@ router.get('/:id', function (req, res, next) {
 
   collection.findOne({
     _id: ObjectID(req.params.id)
-  }, function (err, users) {
+  }, function (err, result) {
     if (err) {
       res.send(err);
     } else {
-      res.json(users);
+      res.json(result);
     }
   });
 });

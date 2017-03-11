@@ -6,14 +6,14 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { UserDetails } from '../interfaces/user.interface';
+import { UserDetails } from '../interfaces/userDetails.interface';
 
 @Injectable()
 export class UserService {
   url = 'http://localhost:3030/users/';
 
   constructor(private http: Http) {
-    console.log('UserService initializing...');
+
   }
 
   getUsers() {

@@ -32,11 +32,9 @@
     <input id="user-last-name" type="text" name="userDetails.lastName" [(ngModel)]="userDetails.lastName"/>
   </p>
   <p>
-    <label for="user-gender">Gender:</label>
-    <select id="user-gender" name="userDetails.gender" [(ngModel)]="userDetails.gender">
-      <option value="female">Female</option>
-      <option value="male">Male</option>
-      <option value="other">Other</option>
+    <label for="user-pronouns">Pronouns:</label>
+    <select id="user-pronouns" name="userDetails.pronouns" [(ngModel)]="userDetails.pronouns">
+      <option *ngFor="let pronoun of pronouns" [ngValue]="pronoun">{{pronoun.subject}}/{{pronoun.object}}</option>
     </select>
   </p>
   <p>
@@ -57,9 +55,3 @@
   </p>
   <button (click)="updateUser()">Save</button>
 </form>
-<hr/>
-<h3>Posts</h3>
-<div *ngFor="let post of posts">
-  <h4>{{post.title}}</h4>
-  <p>{{post.body}}</p>
-</div>
