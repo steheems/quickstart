@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<h1>Hello {{name}}</h1>
+<h1>Hello {{userDetails.firstName}} {{userDetails.lastName}}</h1>
 <h3>Email:</h3>
 <p><a href="mailto:{{email}}">{{email}}</a></p>
-<h3>Adress:</h3>
-<p>{{adress.street}} {{adress.city}}, {{adress.state}}</p>
+<h3>Address:</h3>
+<p>{{address.street}} {{address.city}}, {{address.state}}</p>
 <button (click)="toggleHobbies()">{{showHobbies ? 'Hide hobbies' : 'Show hobbies'}}</button>
 <div *ngIf="showHobbies">
   <h3>Hobbies</h3>
@@ -24,25 +24,38 @@
 <h3>Edit user</h3>
 <form>
   <p>
-    <label for="user-name">Name:</label>
-    <input id="user-name" type="text" name="name" [(ngModel)]="name"/>
+    <label for="user-first-name">First name:</label>
+    <input id="user-first-name" type="text" name="userDetails.firstName" [(ngModel)]="userDetails.firstName"/>
+  </p>
+  <p>
+    <label for="user-last-name">Last name:</label>
+    <input id="user-last-name" type="text" name="userDetails.lastName" [(ngModel)]="userDetails.lastName"/>
+  </p>
+  <p>
+    <label for="user-gender">Gender:</label>
+    <select id="user-gender" name="userDetails.gender" [(ngModel)]="userDetails.gender">
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
   </p>
   <p>
     <label for="user-email">Email:</label>
     <input id="user-email" type="text" name="email" [(ngModel)]="email"/>
   </p>
   <p>
-    <label for="user-adress-street">Street:</label>
-    <input id="user-adress-street" type="text" name="adress.street" [(ngModel)]="adress.street"/>
+    <label for="user-address-street">Street:</label>
+    <input id="user-address-street" type="text" name="address.street" [(ngModel)]="address.street"/>
   </p>
   <p>
-    <label for="user-adress-city">City:</label>
-    <input id="user-adress-city" type="text" name="adress.city" [(ngModel)]="adress.city"/>
+    <label for="user-address-city">City:</label>
+    <input id="user-address-city" type="text" name="address.city" [(ngModel)]="address.city"/>
   </p>
   <p>
-    <label for="user-adress-state">State:</label>
-    <input id="user-adress-state" type="text" name="adress.state" [(ngModel)]="adress.state"/>
+    <label for="user-address-state">State:</label>
+    <input id="user-address-state" type="text" name="address.state" [(ngModel)]="address.state"/>
   </p>
+  <button (click)="updateUser()">Save</button>
 </form>
 <hr/>
 <h3>Posts</h3>

@@ -1,7 +1,7 @@
 /**
  * Service for getting placeholder posts.
  *
- * Created by erwin on 17-03-10.
+ * Created by erwin on 2017-03-10.
  */
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
