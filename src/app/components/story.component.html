@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <h1>Story</h1>
-<p>
-  <pronoun [pronounsId]="user?.pronounsId" pronounType="PossessiveAdjective"></pronoun>
-  name was {{user?.firstName}}.
-</p>
-<p>
-  <pronoun [pronounsId]="user?.pronounsId" pronounType="Subject"></pronoun>
-  was called {{user?.firstName}} {{user?.lastName}}.
-</p>
-<p>
-  That name was
-  <pronoun [pronounsId]="user?.pronounsId" pronounType="possessivePronoun"></pronoun>
-  name.
-</p>
-<p>
-  {{user?.firstName}} is what they called
-  <pronoun [pronounsId]="user?.pronounsId" pronounType="object"></pronoun>
-  .
-</p>
+<form>
+  <p *ngFor="let user of selectedUsers; let i = index">
+    <select name="selectedUsers[{{i}}]" [(ngModel)]="selectedUsers[i]">
+      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser" [selected]="optionUser._id === selectedUsers[i]._id">
+        {{optionUser.firstName}} {{optionUser.lastName}}
+      </option>
+    </select>
+  </p>
+  <p>
+    <select name="newUser" [(ngModel)]="newUser">
+      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser">{{optionUser.firstName}}
+        {{optionUser.lastName}}
+      </option>
+    </select>
+    <button (click)="addUser()">+</button>
+  </p>
+</form>
+
+<div *ngFor="let user of selectedUsers">
+  <p>
+    <pronoun [pronounsId]="user?.pronounsId" pronounType="PossessiveAdjective"></pronoun> name was {{user?.firstName}}.
+  </p>
+  <p>
+    <pronoun [pronounsId]="user?.pronounsId" pronounType="Subject"></pronoun> was called {{user?.firstName}} {{user?.lastName}}.
+  </p>
+  <p>
+    That name was <pronoun [pronounsId]="user?.pronounsId" pronounType="possessivePronoun"></pronoun>.
+  </p>
+  <p>
+    {{user?.firstName}} is what they called <pronoun [pronounsId]="user?.pronounsId" pronounType="object"></pronoun>.
+  </p>
+</div>
