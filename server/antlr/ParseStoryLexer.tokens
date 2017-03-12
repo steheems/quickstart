@@ -1,0 +1,14 @@
+LT=1
+GT=2
+BRACKET_OPEN=3
+BRACKET_CLOSE=4
+TEXT=5
+SYMBOL=6
+SPACE=7
+APOSTROPH=8
+'<'=1
+'>'=2
+'['=3
+']'=4
+' '=7
+'\''=8

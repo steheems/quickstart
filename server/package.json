@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "antlr4": "^4.6.0",
     "body-parser": "~1.16.0",
     "bson-ext": "^1.0.5",
     "cookie-parser": "~1.4.3",

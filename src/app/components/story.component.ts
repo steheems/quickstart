@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/users.service';
 import { UserDetails } from '../interfaces/userDetails.interface';
 import { PronounType } from '../enums/pronounTypes.interface';
+
 /**
  * Class for generating a story component.
  *
@@ -17,6 +18,7 @@ import { PronounType } from '../enums/pronounTypes.interface';
 export class StoryComponent implements OnInit {
   user: UserDetails;
   pronounType: PronounType;
+  antlr: string;
 
   constructor(private userService: UserService) {
     this.pronounType = new PronounType();
