@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <h1>Story</h1>
 <form>
-  <p *ngFor="let user of selectedUsers; let i = index">
-    <select name="selectedUsers[{{i}}]" [(ngModel)]="selectedUsers[i]">
-      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser" [selected]="optionUser._id === selectedUsers[i]._id">
+  <p>
+    <select name="relation.user1" [ngModel]="relation?.user1" (ngModelChange)="relation.user1=$event">
+      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser" [selected]="optionUser?._id === relation?.user1?._id">
         {{optionUser.firstName}} {{optionUser.lastName}}
       </option>
     </select>
   </p>
   <p>
-    <select name="newUser" [(ngModel)]="newUser">
-      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser">{{optionUser.firstName}}
-        {{optionUser.lastName}}
+    <select name="relation.user2" [ngModel]="relation?.user2" (ngModelChange)="relation.user2=$event">
+      <option *ngFor="let optionUser of allUsers" [ngValue]="optionUser" [selected]="optionUser?._id === relation?.user2?._id">
+        {{optionUser.firstName}} {{optionUser.lastName}}
       </option>
     </select>
-    <button (click)="addUser()">+</button>
+    <select name="relation.relationType" [ngModel]="relation?.relationType" (ngModelChange)="relation.relationType=$event">
+      <option *ngFor="let relationType of allRelationTypes" [ngValue]="relationType">{{relationType.name}}</option>
+    </select>
   </p>
+  <button (click)="refresh()">Randomize</button>
 </form>
 
-<div *ngFor="let user of selectedUsers">
+<div>
   <p>
-    <pronoun [pronounsId]="user?.pronounsId" pronounType="PossessiveAdjective"></pronoun> name was {{user?.firstName}}.
+    {{relation?.user1?.pronouns.possessiveAdjective | capitalizeFirstLetter}} name was {{relation?.user1?.firstName}}.
   </p>
   <p>
-    <pronoun [pronounsId]="user?.pronounsId" pronounType="Subject"></pronoun> was called {{user?.firstName}} {{user?.lastName}}.
+    {{relation?.user1?.pronouns.subject | capitalizeFirstLetter}} was called {{relation?.user1?.firstName}} {{relation?.user1?.lastName}}.
   </p>
   <p>
-    That name was <pronoun [pronounsId]="user?.pronounsId" pronounType="possessivePronoun"></pronoun>.
+    That name was {{relation?.user1?.pronouns.possessivePronoun}}.
   </p>
   <p>
-    {{user?.firstName}} is what they called <pronoun [pronounsId]="user?.pronounsId" pronounType="object"></pronoun>.
+    {{relation?.user1?.firstName}} is what they called {{relation?.user1?.pronouns.object}}.
+  </p>
+  <p [hidden]="relation?.relationType?.related">
+    {{relation?.user1?.firstName}} and {{relation?.user2?.firstName}} are not related.
+  </p>
+  <p [hidden]="!relation?.relationType?.related">
+    {{relation?.user1?.firstName}} and {{relation?.user2?.firstName}} are related.
+  </p>
+  <p [hidden]="noGenderDifference()">
+    {{relation?.user2?.firstName}} is {{relation?.user1?.pronouns.possessiveAdjective}} {{getRelationType(relation?.user2)}} and {{relation?.user1?.firstName}} is {{relation?.user2?.pronouns.possessiveAdjective}} {{getRelationType(relation?.user1, true)}}.
+  </p>
+  <p [hidden]="!noGenderDifference()">
+    {{relation?.user2?.firstName}} and {{relation?.user1?.firstName}} are {{getRelationType()}}s.
   </p>
 </div>

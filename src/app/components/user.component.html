@@ -35,8 +35,7 @@
   </p>
   <p>
     <label for="user-pronouns">Pronouns:</label>
-    <select id="user-pronouns" name="userDetails.pronounsId" [ngModel]="userDetails?.pronounsId"
-            (ngModelChange)="userDetails.pronounsId=$event">
+    <select id="user-pronouns" name="userDetails.pronouns" [ngModel]="userDetails?.pronouns?._id" (ngModelChange)="changePronouns($event, userDetails)">
       <option *ngFor="let pronoun of pronouns" [ngValue]="pronoun._id">{{pronoun.subject}}/{{pronoun.object}}</option>
     </select>
   </p>

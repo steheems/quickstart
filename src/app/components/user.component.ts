@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/users.service';
+import { UserService } from '../services/user.service';
 import { UserDetails } from '../interfaces/userDetails.interface';
 import { Address } from '../interfaces/address.interface';
 import { PronounService } from '../services/pronoun.service';
@@ -52,6 +52,12 @@ export class UserComponent implements OnInit {
 
   deleteHobby(index: number) {
     this.hobbies.splice(index, 1);
+  }
+
+  changePronouns(event: any, user: UserDetails) {
+    user.pronouns = this.pronouns.find(pronoun => {
+      return pronoun._id === event;
+    });
   }
 
   updateUser() {
